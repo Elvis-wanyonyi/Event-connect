@@ -1,0 +1,51 @@
+server:
+  port: 8888
+
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: event-service
+          uri: http://localhost:8000
+          predicates:
+            - Path=/api/v1/events/**
+          filters:
+            - name: AuthGatewayFilter
+
+        - id: ticket-service
+          uri: http://localhost:8001
+          predicates:
+            - Path=/api/v1/tickets/**
+          filters:
+            - name: AuthGatewayFilter
+
+        - id: user-service
+          uri: http://localhost:9000
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: AuthGatewayFilter
+
+
+  application:
+    name: api-gateway
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      preferIpAddress: true
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway:
+            route:
+              RouteDefinitionLocator: INFO
+            nodeValue: TRACE
+    root: INFO

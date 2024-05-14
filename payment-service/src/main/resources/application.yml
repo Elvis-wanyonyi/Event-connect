@@ -1,0 +1,34 @@
+server:
+  port: 7777
+
+spring:
+  application:
+    name: payment-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      preferIpAddress: true
+
+
+mpesa:
+  daraja:
+    consumer-key: 5Xw38G7zbGdKxNXcuk9SaTCluPPYYAmTIBuGWdxpuvNFzEuT
+    consumer-secret: 8ugSIKFl6FKfywTw3pAGRJKc1GGa3rlWS2KCyMhVx0o4KIFP77cwlTq4vGPG0nzf
+    oauth-endpoint: https://sandbox.safaricom.co.ke/oauth/v1/generate
+    grant_type: client_credentials
+
+    register-url-endpoint: https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl
+    simulate-transaction-endpoint: https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate
+    shortCode: 601426
+    confirmationURL: https://3602-105-161-22-136.ngrok-free.app/payment/confirmation
+    validationURL: https://3602-105-161-22-136.ngrok-free.app/payment/validation
+    responseType: Completed
+
+    stkPassKey: bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919
+    stkPushShortCode: 174379
+    stkPushRequestUrl: https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest
+    stkPushRequestCallbackUrl: https://3a0d-197-182-121-211.ngrok-free.app/api/payment/stk-push-status
+

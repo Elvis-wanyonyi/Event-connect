@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: email-service
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: elviswanyonyi01@gmail.com
+    password: xhpf zjwu wgbb bbfq
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: emailGroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.type.mapping: event:com.wolfcode.emailservice.dto.EmailRequest
+      auto-offset-reset: earliest
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      preferIpAddress: true
+
+
+server:
+  port: 9191
